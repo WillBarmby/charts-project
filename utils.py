@@ -88,7 +88,6 @@ def make_swarm_plot(
             )
 
 
-
     # Format
     ax.set_xlim(xlim)
     ax.set_ylim(ylim)
