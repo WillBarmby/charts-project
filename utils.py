@@ -34,7 +34,9 @@ def make_swarm_plot(
     # Validate group values
     if not set(df[group_column].unique()).issubset({'Charter', 'Non Charter'}):
         raise ValueError(f"Unexpected group values found in '{group_column}'. Only 'Charter' and 'Non Charter' allowed.")
-
+    
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True,)
     # Apply filters
     if isinstance(filter_column, dict):
         for col, val in filter_column.items():
