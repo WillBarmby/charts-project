@@ -24,8 +24,9 @@ def make_swarm_plot(
     title_pad=20,
     bottom_margin=0.3,
     top_margin=0.8,
-    dot_size = 6
-):
+    dot_size = 6,
+    format_as_percent = True
+    ):
     # Load data
     df = pd.read_excel(excel_path, sheet_name=sheet_name)
 
@@ -94,28 +95,41 @@ def make_swarm_plot(
     ax.set_title(title, fontsize=14, pad=title_pad, fontweight ='bold')
     ax.set_xlabel(xlabel, fontsize=12)
     ax.set_ylabel(ylabel, fontsize=12)
-    ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0, decimals=0))
+    if format_as_percent:
+        ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0, decimals=0))
     ax.grid(axis='x', linestyle='--', alpha=0.5)
 
     ax.set_yticks([0, 1])
     ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='normal')
     
-    ax.yaxis.set_label_coords(-0.15, 0.60)  # -0.15 was working for you; just raise y
+    ax.yaxis.set_label_coords(-0.15, 0.60)  
 
 
     for i, group in enumerate(group_display_order):
         group_data = df_plot[df_plot["Group"] == group]
         n = group_data.shape[0]
         avg = group_data["Score"].mean()
-        ax.text(
-            1.02, i,
-           f"n = {n}\navg = {avg:.0%}",
-            transform=ax.get_yaxis_transform(),
-            va='center',
-            fontsize=12,
-            fontstyle='italic'
-        )
+        if format_as_percent:
+            ax.text(
+                1.02, i,
+            f"n = {n}\navg = {avg:.0%}",
+                transform=ax.get_yaxis_transform(),
+                va='center',
+                fontsize=12,
+                fontstyle='italic'
+            )
+        else:
+            ax.text(
+                1.02, i,
+            f"n = {n}\navg = {avg:.2f}",
+                transform=ax.get_yaxis_transform(),
+                va='center',
+                fontsize=12,
+                fontstyle='italic'
+            )
 
+        
+        
     # Adjust layout
     plt.subplots_adjust(top=top_margin, bottom=bottom_margin)
     plt.tight_layout()

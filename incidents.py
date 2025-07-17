@@ -9,11 +9,12 @@ make_swarm_plot(
             filter_column="Grade Span",
             filter_value="09-12",
             title=f"Figure X.X: Behavioral Incident Rate per Student in Grades 09–12 Schools",
-            xlabel="Behavioral Incidents per Student (%)",
+            xlabel="Behavioral Incidents per Student",
             output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Total_Incidence.png",
             figsize=(8,4),
             ylim=(-.75,1.25),
-            dot_size=6
+            dot_size=6,
+            format_as_percent= False
 )
 
 # make_swarm_plot(
