@@ -18,3 +18,6 @@ def run_grad_rate():
                 ylim=(-.75,1.25),
                 dot_size=6.5,
     )
+
+if __name__ == "__main__":
+    run_grad_rate()

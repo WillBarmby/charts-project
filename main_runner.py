@@ -3,6 +3,7 @@ from grad_rate import run_grad_rate
 from incidents import run_incidents
 from PSE import run_post_sec_enroll
 from test_scores import run_test_scores
+from disability_scores import run_disability_test_scores
 
 if __name__ == "__main__":
     run_chronic_absent_grades()
@@ -11,4 +12,5 @@ if __name__ == "__main__":
     run_grad_rate()
     run_incidents()
     run_test_scores()
+    run_disability_test_scores()
     

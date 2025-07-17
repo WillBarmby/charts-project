@@ -14,10 +14,13 @@ TEST_SCORE_SUBJECTS = ["Math", "English Language Arts", "Science"]
 TEST_SCORE_GRADE_SPANS = ["03-06", "03-08", "09-12", "07-12", "06-12"]
 TEST_SCORE_FIG_NUMS = ["X.X"] * 15
 
+# Disability Scores
+DISABILITY_SCORE_FIG_NUMS = ["X.X"] * 15
+
 # Incidents Chart
-INCIDENTS_TITLE = "Figure X.X: Behavioral Incident Rate per Student in Grades 09–12 Schools"
+INCIDENTS_TITLE = "Figure X.X: Behavioral Incident Rate per Student in Schools Serving Grades 09–12"
 INCIDENTS_X_LABEL = "Behavioral Incidents per Student"
 
-# Graduatoin Rate
+# Graduation Rate
 GRAD_RATE_TITLE = "Figure X.X: Four-Year Graduation Rate vs. Type of School"
 GRAD_RATE_X_LABEL = "Graduation Rate (%)"

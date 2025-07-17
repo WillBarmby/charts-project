@@ -51,7 +51,6 @@ def make_swarm_plot(
     if df_plot.empty:
         print("No data to plot.")
         return
-
     # Define order
     group_display_order = ["Non Charter", "Charter"]
 
@@ -109,6 +108,9 @@ def make_swarm_plot(
 
     for i, group in enumerate(group_display_order):
         group_data = df_plot[df_plot["Group"] == group]
+        if group_data.empty:
+            print(f"no data for {group}")
+            return
         n = group_data.shape[0]
         avg = group_data["Score"].mean()
         if format_as_percent:
@@ -138,7 +140,6 @@ def make_swarm_plot(
     plt.savefig(output_path, dpi=600, bbox_inches="tight")
     plt.close()
     print(f"Saved: {output_path}")
-
 
 def run_t_test(
     score_column,

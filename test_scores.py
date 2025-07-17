@@ -16,7 +16,7 @@ def run_test_scores():
                 score_column="Percentage of Students at Achievement Level",
                 group_column="Comparison School Type",
                 filter_column={"Comparison Grade Span": span, "Assessment": subject},
-                title=f"Figure {TEST_SCORE_FIG_NUMS[i]}: {subject} Achievement for Grades {span}",
+                title=f"Figure {TEST_SCORE_FIG_NUMS[i]}: {subject} Achievement for Schools Serving Grades {span}",
                 xlabel="Percentage of Students Below Achievement Level",
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/{subject} - {span}.png",
                 figsize=(8,4),
