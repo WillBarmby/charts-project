@@ -3,6 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import os
+from scipy.stats import ttest_ind
 
 # Set global font
 plt.rcParams['font.family'] = 'Georgia'
@@ -135,3 +136,29 @@ def make_swarm_plot(
     plt.savefig(output_path, dpi=600, bbox_inches="tight")
     plt.close()
     print(f"Saved: {output_path}")
+
+
+def run_t_test(
+    score_column,
+    sheet_name,
+    excel_path = "/Users/willbarmby/Python-Projects/charts/data.xlsx",
+    group_column="Comparison School Type",
+    p_value_text = "/Users/willbarmby/Python-Projects/charts/p_vals.txt"
+):
+    # Load data
+    df = pd.read_excel(excel_path, sheet_name=sheet_name)
+
+    # Drop NA and rename for plotting
+    df_plot = df[[score_column, group_column]].dropna()
+    df_plot.columns = ['Score', 'Group']
+
+    assert not df_plot.empty, "No data to plot."
+
+    charter_schools = df_plot[df_plot['Group'] == 'Charter']['Score']
+    non_charter_schools = df_plot[df_plot['Group'] == 'Non Charter']['Score']
+
+    t_test, p_value = ttest_ind(charter_schools, non_charter_schools, equal_var=False)
+
+    p_value_text = "/Users/willbarmby/Python-Projects/charts/p_vals.txt"
+    with open(p_value_text, mode='a',) as f:
+        f.write(f"the p value for sheet: {sheet_name} : {p_value}\n")
