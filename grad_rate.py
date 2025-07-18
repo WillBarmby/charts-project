@@ -15,7 +15,7 @@ def run_grad_rate():
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Graduation_Rate.png",
                 figsize=(8,4),
                 xlim=(.4,1.05),
-                ylim=(-.75,1.25),
+                ylim=(-.5,1.5),
                 dot_size=6.5,
     )
 

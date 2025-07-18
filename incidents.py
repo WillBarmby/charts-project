@@ -13,7 +13,7 @@ def run_incidents():
                 xlabel= INCIDENTS_X_LABEL,
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Total_Incidence.png",
                 figsize=(8,4),
-                ylim=(-.75,1.25),
+                ylim=(-.5,1.5),
                 dot_size=6,
                 format_as_percent= False
     )

@@ -11,7 +11,7 @@ def run_post_sec_enroll():
                 xlabel= PSE_X_LABEL,
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/PSE.png",
                 figsize=(8,4),
-                ylim=(-.75,1.25),
+                ylim=(-.5,1.5),
                 dot_size=6
     )
 if __name__ == "__main__":

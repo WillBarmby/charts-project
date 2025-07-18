@@ -37,6 +37,7 @@ def make_swarm_plot(
     
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True,)
+    
     # Apply filters
     if isinstance(filter_column, dict):
         for col, val in filter_column.items():
@@ -72,6 +73,7 @@ def make_swarm_plot(
     )
     
 
+
     # Add short black vertical lines at group averages
     for group in group_display_order:
         group_scores = df_plot[df_plot["Group"] == group]["Score"]
@@ -103,7 +105,7 @@ def make_swarm_plot(
     ax.set_yticks([0, 1])
     ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='normal')
     
-    ax.yaxis.set_label_coords(-0.15, 0.60)  
+    ax.yaxis.set_label_coords(-0.15, 0.50)  
 
 
     for i, group in enumerate(group_display_order):

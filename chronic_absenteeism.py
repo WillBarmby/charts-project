@@ -15,7 +15,7 @@ def run_chronic_absent_grades():
                         xlabel= CHRON_ABSENT_X_LABEL,
                         output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Chronic_Absenteeism/Chronic_Absenteeism-{CHRON_ABSENT_GRADE_SPANS[i]}.png",
                         figsize=(8,4),
-                        ylim=(-.75,1.25),
+                        ylim=(-.5,1.5),
                         dot_size=8
                 )
 
@@ -29,7 +29,7 @@ def run_chronic_absent_total():
                 xlabel= CHRON_ABSENT_X_LABEL,
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Chronic_Absenteeism/Chronic_Absenteeism-Total.png",
                 figsize=(8,4),
-                ylim=(-.75,1.25),
+                ylim=(-.5,1.5),
                 dot_size=3.2
         )
 
