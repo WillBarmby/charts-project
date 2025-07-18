@@ -35,8 +35,8 @@ def run_disability_test_scores():
             xlabel="Percentage of Students Below Achievement Level",
             output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/disability_scores/disabilities {subject} total.png",
             figsize=(8,4),
-            ylim=(-.75,1.25),
-            dot_size=3
+            ylim=(-1.75,2.75),
+            dot_size=5
 )
 
 
