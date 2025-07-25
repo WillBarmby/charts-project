@@ -16,7 +16,7 @@ def run_chronic_absent_grades():
                         output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Chronic_Absenteeism/Chronic_Absenteeism-{CHRON_ABSENT_GRADE_SPANS[i]}.png",
                         figsize=(8,4),
                         ylim=(-.5,1.5),
-                        dot_size=8
+                        dot_size=7
                 )
 
 def run_chronic_absent_total():

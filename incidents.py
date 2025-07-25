@@ -14,7 +14,7 @@ def run_incidents():
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/Total_Incidence.png",
                 figsize=(8,4),
                 ylim=(-.5,1.5),
-                dot_size=6,
+                dot_size=7,
                 format_as_percent= False
     )
 

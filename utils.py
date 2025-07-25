@@ -167,3 +167,378 @@ def run_t_test(
     p_value_text = "/Users/willbarmby/Python-Projects/charts/p_vals.txt"
     with open(p_value_text, mode='a',) as f:
         f.write(f"the p value for sheet: {sheet_name} : {p_value}\n")
+
+# def make_swarm_plot_auto_xlim(
+#     excel_path,
+#     sheet_name,
+#     score_column,
+#     group_column,
+#     filter_column=None,
+#     filter_value=None,
+#     title="Swarm Plot",
+#     xlabel="Score",
+#     ylabel="School Type",
+#     output_path="swarm_plot.png",
+#     ylim=(-0.5, 1.5),
+#     figsize=(8, 2.8),
+#     title_pad=20,
+#     bottom_margin=0.3,
+#     top_margin=0.8,
+#     dot_size=6,
+#     format_as_percent=True
+# ):
+#     # Load data
+#     df = pd.read_excel(excel_path, sheet_name=sheet_name)
+
+#     # Validate group values
+#     if not set(df[group_column].unique()).issubset({'Charter', 'Non Charter'}):
+#         raise ValueError(f"Unexpected group values in '{group_column}'.")
+
+#     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+#     # Apply filters
+#     if isinstance(filter_column, dict):
+#         for col, val in filter_column.items():
+#             df = df[df[col] == val]
+#     elif filter_column and filter_value:
+#         df = df[df[filter_column] == filter_value]
+
+#     # Prepare plot data
+#     df_plot = df[[score_column, group_column]].dropna()
+#     df_plot.columns = ['Score', 'Group']
+
+#     if df_plot.empty:
+#         print("No data to plot.")
+#         return
+
+#     # Auto x-axis limits
+#     min_score = df_plot["Score"].min()
+#     max_score = df_plot["Score"].max()
+#     padding = (max_score - min_score) * 0.05 if max_score > min_score else 0.05
+#     xlim = (min_score - padding, max_score + padding)
+
+#     # Define group order
+#     group_display_order = ["Non Charter", "Charter"]
+
+#     fig, ax = plt.subplots(figsize=figsize)
+
+#     sns.swarmplot(
+#         data=df_plot,
+#         x="Score",
+#         y="Group",
+#         order=group_display_order,
+#         size=dot_size,
+#         palette={"Charter": (1.0, 200/250, 0.0), "Non Charter": (5/250, 86/250, 165/250)},
+#         edgecolor="black",
+#         linewidth=0.5,
+#         ax=ax,
+#         hue="Group",
+#         legend=False
+#     )
+
+#     # Add average lines
+#     for group in group_display_order:
+#         group_scores = df_plot[df_plot["Group"] == group]["Score"]
+#         if not group_scores.empty:
+#             avg = group_scores.mean()
+#             y_center = group_display_order.index(group)
+#             ax.vlines(
+#                 x=avg,
+#                 ymin=y_center - 0.15,
+#                 ymax=y_center + 0.15,
+#                 color="black",
+#                 linewidth=1.8,
+#                 alpha=0.9
+#             )
+
+#     ax.set_xlim(xlim)
+#     ax.set_ylim(ylim)
+#     ax.set_title(title, fontsize=14, pad=title_pad, fontweight='bold')
+#     ax.set_xlabel(xlabel, fontsize=12)
+#     ax.set_ylabel(ylabel, fontsize=12)
+
+#     if format_as_percent:
+#         ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0, decimals=0))
+#     ax.grid(axis='x', linestyle='--', alpha=0.5)
+
+#     ax.set_yticks([0, 1])
+#     ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='normal')
+#     ax.yaxis.set_label_coords(-0.15, 0.50)
+
+#     # Annotate sample sizes and means
+#     for i, group in enumerate(group_display_order):
+#         group_data = df_plot[df_plot["Group"] == group]
+#         if group_data.empty:
+#             print(f"no data for {group}")
+#             return
+#         n = group_data.shape[0]
+#         avg = group_data["Score"].mean()
+#         annotation = f"n = {n}\navg = {avg:.0%}" if format_as_percent else f"n = {n}\navg = {avg:.2f}"
+#         ax.text(
+#             xlim[1] + padding * 0.5, i,
+#             annotation,
+#             transform=ax.get_yaxis_transform(),
+#             va='center',
+#             fontsize=12,
+#             fontstyle='italic'
+#         )
+
+#     plt.subplots_adjust(top=top_margin, bottom=bottom_margin)
+#     plt.tight_layout()
+#     plt.savefig(output_path, dpi=600, bbox_inches="tight")
+#     plt.close()
+#     print(f"Saved: {output_path}")
+
+# def make_swarm_plot_auto_xlim(
+#     excel_path,
+#     sheet_name,
+#     score_column,
+#     group_column,
+#     filter_column=None,
+#     filter_value=None,
+#     title="Swarm Plot",
+#     xlabel="Score",
+#     ylabel="School Type",
+#     output_path="swarm_plot.png",
+#     ylim=(-0.5, 1.5),
+#     figsize=(8, 2.8),
+#     title_pad=20,
+#     bottom_margin=0.3,
+#     top_margin=0.8,
+#     dot_size=6,
+#     format_as_percent=True
+# ):
+#     import os
+#     import pandas as pd
+#     import matplotlib.pyplot as plt
+#     import matplotlib.ticker as mtick
+#     import seaborn as sns
+
+#     df = pd.read_excel(excel_path, sheet_name=sheet_name)
+
+#     if not set(df[group_column].unique()).issubset({'Charter', 'Non Charter'}):
+#         raise ValueError(f"Unexpected group values in '{group_column}'.")
+
+#     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+#     if isinstance(filter_column, dict):
+#         for col, val in filter_column.items():
+#             df = df[df[col] == val]
+#     elif filter_column and filter_value:
+#         df = df[df[filter_column] == filter_value]
+
+#     df_plot = df[[score_column, group_column]].dropna()
+#     df_plot.columns = ['Score', 'Group']
+
+#     if df_plot.empty:
+#         print("No data to plot.")
+#         return
+
+#     # Compute annotation x position and expanded xlim
+    
+
+
+#     group_display_order = ["Non Charter", "Charter"]
+
+#     fig, ax = plt.subplots(figsize=figsize)
+
+#     min_score = df_plot["Score"].min()
+#     max_score = df_plot["Score"].max()
+#     padding = (max_score - min_score) * 0.05 if max_score > min_score else 0.05
+#     x_annot = max_score + padding * 0.5
+#     xlim = (min_score - padding, x_annot + padding * 0.5)
+#     ax.set_xlim(xlim)
+
+#     sns.swarmplot(
+#         data=df_plot,
+#         x="Score",
+#         y="Group",
+#         order=group_display_order,
+#         size=dot_size,
+#         palette={"Charter": (1.0, 200/250, 0.0), "Non Charter": (5/250, 86/250, 165/250)},
+#         edgecolor="black",
+#         linewidth=0.5,
+#         ax=ax,
+#         hue="Group",
+#         legend=False
+#     )
+
+#     for group in group_display_order:
+#         group_scores = df_plot[df_plot["Group"] == group]["Score"]
+#         if not group_scores.empty:
+#             avg = group_scores.mean()
+#             y_center = group_display_order.index(group)
+#             ax.vlines(
+#                 x=avg,
+#                 ymin=y_center - 0.15,
+#                 ymax=y_center + 0.15,
+#                 color="black",
+#                 linewidth=1.8,
+#                 alpha=0.9
+#             )
+
+#     # ax.set_xlim(xlim)
+#     ax.set_ylim(ylim)
+#     ax.set_title(title, fontsize=14, pad=title_pad, fontweight='bold')
+#     ax.set_xlabel(xlabel, fontsize=12)
+#     ax.set_ylabel(ylabel, fontsize=12)
+
+#     if format_as_percent:
+#         ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0, decimals=0))
+
+#     ax.grid(axis='x', linestyle='--', alpha=0.5)
+#     ax.set_yticks([0, 1])
+#     ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='normal')
+#     ax.yaxis.set_label_coords(-0.15, 0.50)
+
+#     for i, group in enumerate(group_display_order):
+#         group_data = df_plot[df_plot["Group"] == group]
+#         if group_data.empty:
+#             print(f"no data for {group}")
+#             return
+#         n = group_data.shape[0]
+#         avg = group_data["Score"].mean()
+#         annotation = f"n = {n}\navg = {avg:.0%}" if format_as_percent else f"n = {n}\navg = {avg:,.0f}"
+#         ax.text(
+#             x_annot, i,
+#             annotation,
+#             ha='left',
+#             va='center',
+#             fontsize=12,
+#             fontstyle='italic'
+#         )
+
+
+#     plt.subplots_adjust(top=top_margin, bottom=bottom_margin)
+#     plt.tight_layout()
+#     plt.savefig(output_path, dpi=600, bbox_inches="tight")
+#     plt.close()
+#     print(f"Saved: {output_path}")
+
+
+def make_swarm_plot_auto_xlim(
+    excel_path,
+    sheet_name,
+    score_column,
+    group_column,
+    filter_column=None,
+    filter_value=None,
+    title="Swarm Plot",
+    xlabel="Score",
+    ylabel="School Type",
+    output_path="swarm_plot.png",
+    ylim=(-0.5, 1.5),
+    figsize=(8, 2.8),
+    title_pad=20,
+    bottom_margin=0.3,
+    top_margin=0.8,
+    dot_size=6,
+    format_as_percent=True
+):
+    import os
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker as mtick
+    import seaborn as sns
+    from matplotlib.transforms import offset_copy
+
+    # Load and filter data
+    df = pd.read_excel(excel_path, sheet_name=sheet_name)
+    if not set(df[group_column].unique()).issubset({'Charter', 'Non Charter'}):
+        raise ValueError(f"Unexpected group values in '{group_column}'.")
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    if isinstance(filter_column, dict):
+        for col, val in filter_column.items():
+            df = df[df[col] == val]
+    elif filter_column and filter_value:
+        df = df[df[filter_column] == filter_value]
+
+    df_plot = df[[score_column, group_column]].dropna()
+    df_plot.columns = ['Score', 'Group']
+
+    if df_plot.empty:
+        print("No data to plot.")
+        return
+
+    # Initialize plot
+    group_display_order = ["Non Charter", "Charter"]
+    fig, ax = plt.subplots(figsize=figsize)
+
+    min_score = df_plot["Score"].min()
+    max_score = df_plot["Score"].max()
+    padding = (max_score - min_score) * 0.05 if max_score > min_score else 0.05
+    ax.set_xlim(min_score - padding, max_score + padding * 1.2)
+
+    # Swarmplot
+    sns.swarmplot(
+        data=df_plot,
+        x="Score",
+        y="Group",
+        order=group_display_order,
+        size=dot_size,
+        palette={"Charter": (1.0, 200/250, 0.0), "Non Charter": (5/250, 86/250, 165/250)},
+        edgecolor="black",
+        linewidth=0.5,
+        ax=ax,
+        hue="Group",
+        legend=False
+    )
+
+    # Add average bars
+    for group in group_display_order:
+        group_scores = df_plot[df_plot["Group"] == group]["Score"]
+        if not group_scores.empty:
+            avg = group_scores.mean()
+            y_center = group_display_order.index(group)
+            ax.vlines(
+                x=avg,
+                ymin=y_center - 0.15,
+                ymax=y_center + 0.15,
+                color="black",
+                linewidth=1.8,
+                alpha=0.9
+            )
+
+    # Styling
+    ax.set_ylim(ylim)
+    ax.set_title(title, fontsize=14, pad=title_pad, fontweight='bold')
+    ax.set_xlabel(xlabel, fontsize=12)
+    ax.set_ylabel(ylabel, fontsize=12)
+
+    if format_as_percent:
+        ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0, decimals=0))
+
+    ax.grid(axis='x', linestyle='--', alpha=0.5)
+    ax.set_yticks([0, 1])
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='normal')
+    ax.yaxis.set_label_coords(-0.15, 0.50)
+
+    # Add annotations using pixel-based offset to avoid overlap
+    text_offset = offset_copy(ax.transData, fig=fig, x=15, units='points')
+    for i, group in enumerate(group_display_order):
+        group_data = df_plot[df_plot["Group"] == group]
+        if group_data.empty:
+            print(f"no data for {group}")
+            return
+        n = group_data.shape[0]
+        avg = group_data["Score"].mean()
+        annotation = (
+            f"n = {n}\navg = {avg:.0%}" if format_as_percent else f"n = {n}\navg = {avg:,.0f}"
+        )
+        ax.text(
+            max_score, i,
+            annotation,
+            ha='left',
+            va='center',
+            fontsize=12,
+            fontstyle='italic',
+            transform=text_offset
+        )
+
+    plt.subplots_adjust(top=top_margin, bottom=bottom_margin)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=600, bbox_inches="tight")
+    plt.close()
+    print(f"Saved: {output_path}")
