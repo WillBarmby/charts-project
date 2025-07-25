@@ -12,11 +12,11 @@ def run_disability_test_scores():
         for span in grade_spans:
             make_swarm_plot(
                 excel_path="/Users/willbarmby/Python-Projects/charts/data.xlsx",
-                sheet_name="Disabilities Scores",
+                sheet_name="Disabilities Overall",
                 score_column="Percentage of Students at Achievement Level",
                 group_column="Comparison School Type",
                 filter_column={"Comparison Grade Span": span, "Assessment": subject},
-                title=f"Figure {DISABILITY_SCORE_FIG_NUMS[i]}: {subject} Achievement of Student with Disabilities for Schoools Serving {span}",
+                title=f"Figure {DISABILITY_SCORE_FIG_NUMS[i]}: {subject} Achievement of Student with Disabilities for Schools Serving {span}",
                 xlabel="Percentage of Students Below Achievement Level",
                 output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/disability_scores/disabilities-{subject} - {span}.png",
                 figsize=(8,4),
@@ -27,7 +27,7 @@ def run_disability_test_scores():
     for subject in subjects:
         make_swarm_plot(
             excel_path="/Users/willbarmby/Python-Projects/charts/data.xlsx",
-            sheet_name="Disabilities Scores",
+            sheet_name="Disabilities Overall",
             score_column="Percentage of Students at Achievement Level",
             group_column="Comparison School Type",
             filter_column={"Assessment": subject},

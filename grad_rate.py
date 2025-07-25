@@ -1,7 +1,5 @@
 from utils import make_swarm_plot
-from utils import run_t_test
 import pandas as pd
-from scipy.stats import ttest_ind
 from config import GRAD_RATE_TITLE, GRAD_RATE_X_LABEL
 
 def run_grad_rate():
@@ -16,7 +14,7 @@ def run_grad_rate():
                 figsize=(8,4),
                 xlim=(.4,1.05),
                 ylim=(-.5,1.5),
-                dot_size=6.5,
+                dot_size=6,
     )
 
 if __name__ == "__main__":

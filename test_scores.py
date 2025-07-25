@@ -6,7 +6,7 @@ def run_test_scores():
     subjects = TEST_SCORE_SUBJECTS
     i = 0
 
-    assert len(TEST_SCORE_FIG_NUMS) == (len(TEST_SCORE_SUBJECTS) * len(TEST_SCORE_GRADE_SPANS)), "mismatched number of fig nums to graphs for score graphs"
+    assert len(TEST_SCORE_FIG_NUMS) == (len(TEST_SCORE_SUBJECTS) * len(TEST_SCORE_GRADE_SPANS)) + len(TEST_SCORE_SUBJECTS), "mismatched number of fig nums to graphs for score graphs"
 
     for subject in subjects:
         for span in grade_spans:
@@ -24,6 +24,20 @@ def run_test_scores():
                 dot_size=7
     )
             i += 1
+        make_swarm_plot(
+                excel_path="/Users/willbarmby/Python-Projects/charts/data.xlsx",
+                sheet_name="All Together New",
+                score_column="Percentage of Students at Achievement Level",
+                group_column="Comparison School Type",
+                title=f"Figure {TEST_SCORE_FIG_NUMS[i]}: {subject} Achievement for All Schools",
+                filter_column={"Assessment": subject},
+                xlabel="Percentage of Students Below Achievement Level",
+                output_path=f"/Users/willbarmby/Python-Projects/charts/graphs/{subject} - Overall.png",
+                figsize=(8,4),
+                ylim=(-.5,1.5),
+                dot_size=3
+        )
+
 
 if __name__ == "__main__":
     run_test_scores()
