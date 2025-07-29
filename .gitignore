@@ -1,7 +1,7 @@
 /Users/willbarmby/Python-Projects/charts/graphs/
 
 '/Users/willbarmby/Python-Projects/charts/old graphs'
-
+/Users/willbarmby/Python-Projects/charts/__pycache__/
 graphs/
 
 Archive/
@@ -12,7 +12,8 @@ data.xlsx
 
 ~$data.xlsx
 
-__pycache__/
+
+
 
 __pycache__
 
