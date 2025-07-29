@@ -25,7 +25,7 @@ def make_swarm_plot(
     title_pad=20,
     bottom_margin=0.3,
     top_margin=0.8,
-    dot_size = 6,
+    dot_size:float = 6.0,
     format_as_percent = True
     ):
     # Load data
